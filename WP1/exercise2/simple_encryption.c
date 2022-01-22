@@ -3,8 +3,12 @@
 // Exercise 2
 // Submission code: XXXXXX (provided by your TA-s)
 
+
+// Include section
 #include <stdio.h>
 #include <stdlib.h>
+
+// Main program section
 
 void main(int argc, char* argv[]) {
     // Get the value that characters should be "shifted" by in the ASCII-code table

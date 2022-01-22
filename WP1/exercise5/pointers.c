@@ -11,19 +11,18 @@
 // Defining the size of array 
 #define MAX 10
 
-// Defining the largest value in array 
+// Defining the largest value in an array 
 #define MAXNUMBER 20
 
-// Set a random number in each slot in array 
+// Main program section
+
+// Set a random number in each slot in array  , fill *tab with these numbers
 void create_random(int* tab);
 
-// Testing purposes 
-void printarray(int* tab, int size);
-
-// Calculate frequency of each number 
+// Calculate frequency of each number count by creating a table , from *tab random numbers
 void count_frequency(int* tab, int* freq);
 
-// Draw a histogram to represent frequency
+// Draw a histogram to represent frequency count table
 void draw_histogram(int* freq);
 
 int main() {
@@ -31,12 +30,12 @@ int main() {
     int* table = (int*)malloc(MAX * sizeof(int));
 
     create_random(table);
-    //printarray (table, MAX); // to test only
-    // 
+
     // create an array and intialize each slot with 0 
     int* frequency = (int*)calloc(MAXNUMBER, sizeof(int));
     count_frequency(table, frequency);
-    //printarray(frequency, MAXNUMBER); // to test only
+
+
     draw_histogram(frequency);
 
     return 0;
@@ -55,17 +54,17 @@ void create_random(int* tab) {
 }
 
 void printarray(int* tab, int size) {
-
+    // for loop
     for (int i = 0; i < size; i++) {
         printf("%d ", tab[i]);
     }
-
+    // space line
     printf("\n");
 }
 
 void count_frequency(int* tab, int* freq) {
 
-    // loop on array to calculate frequency
+    // for loop on array to calculate frequency , until it reaches the limit assigned 
     for (int i = 0; i < MAX; i++) {
 
         freq[tab[i]]++;
@@ -74,6 +73,7 @@ void count_frequency(int* tab, int* freq) {
 
 void draw_histogram(int* freq) {
 
+    // for loop to create histogram of the frequency count according to the MAXNUMBER limit
     for (int i = 0; i < MAXNUMBER; i++) {
 
         if (freq[i] != 0) {

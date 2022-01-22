@@ -1,10 +1,19 @@
+// (C) Ahmed Yasser, Axel Broberg, Niklas Höglund , group: 11 (2022)
+// Work package 1
+// Exercise 4
+// Submission code: XXXXXX (provided by your TA-s)
+
+// Include section
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
+// Initialization variables
 int dec2bin(int dec);
 
 void bin2hex(long int input);
+
+// Main program section
 
 int main() {
 	long int bin = 00001111;
