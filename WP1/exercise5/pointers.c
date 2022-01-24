@@ -16,6 +16,8 @@
 
 // Main program section
 
+//Got few ideas about histogram from here , https://www.geeksforgeeks.org/program-make-histogram-array/
+
 // Set a random number in each slot in array  , fill *tab with these numbers
 void create_random(int* tab);
 
@@ -26,23 +28,24 @@ void count_frequency(int* tab, int* freq);
 void draw_histogram(int* freq);
 
 int main() {
-    // array to hold the random numbers
+    // array to hold the random numbers // malloc returns pointer types , (int*) highlights the type cast that convert pointer type to int*
     int* table = (int*)malloc(MAX * sizeof(int));
 
+    // calling create random  function in main , to create random number in array , also by filling *tab with the "table"
     create_random(table);
 
-    // create an array and intialize each slot with 0 
+    // create an array and intialize each slot with 0 , same use of malloc with freq
     int* frequency = (int*)calloc(MAXNUMBER, sizeof(int));
     count_frequency(table, frequency);
 
-
+    // calling draw histogram function to represent the frequency
     draw_histogram(frequency);
 
     return 0;
 }
 
 void create_random(int* tab) {
-
+    // To make sure its random 
     srand(time(0));
     // loop on array to calculate random number
     for (int i = 0; i < MAX; i++) {
@@ -53,20 +56,11 @@ void create_random(int* tab) {
     }
 }
 
-void printarray(int* tab, int size) {
-    // for loop
-    for (int i = 0; i < size; i++) {
-        printf("%d ", tab[i]);
-    }
-    // space line
-    printf("\n");
-}
-
 void count_frequency(int* tab, int* freq) {
 
     // for loop on array to calculate frequency , until it reaches the limit assigned 
     for (int i = 0; i < MAX; i++) {
-
+        // increment freq 
         freq[tab[i]]++;
     }
 }
@@ -75,13 +69,16 @@ void draw_histogram(int* freq) {
 
     // for loop to create histogram of the frequency count according to the MAXNUMBER limit
     for (int i = 0; i < MAXNUMBER; i++) {
-
+        // if statement to make sure that numbers with no frequencies does not show
         if (freq[i] != 0) {
+            // prints number from the array that have frequency ( replication )
             printf("%d ", i);
-
+            // for loop to go through every element in the array that have freq
             for (int j = 0; j < freq[i]; j++) {
+                // indicate how many similar number in the array 
                 printf("*");
             }
+            // space line 
             printf("\n");
         }
     }
