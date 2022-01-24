@@ -9,7 +9,7 @@
 #include <time.h>
 
 // Defining the size of array 
-#define MAX 10
+#define MAX 100
 
 // Defining the largest value in an array 
 #define MAXNUMBER 20
@@ -27,14 +27,16 @@ void count_frequency(int* tab, int* freq);
 // Draw a histogram to represent frequency count table
 void draw_histogram(int* freq);
 
-int main() {
+int main(void) {
+    // using malloc and calloc for dynamic array allocation
+
     // array to hold the random numbers // malloc returns pointer types , (int*) highlights the type cast that convert pointer type to int*
     int* table = (int*)malloc(MAX * sizeof(int));
 
     // calling create random  function in main , to create random number in array , also by filling *tab with the "table"
     create_random(table);
 
-    // create an array and intialize each slot with 0 , same use of malloc with freq
+    // create an array and intialize each slot with 0 // calloc to allocate multiple memory sizes in the array
     int* frequency = (int*)calloc(MAXNUMBER, sizeof(int));
     count_frequency(table, frequency);
 
@@ -75,7 +77,7 @@ void draw_histogram(int* freq) {
             printf("%d ", i);
             // for loop to go through every element in the array that have freq
             for (int j = 0; j < freq[i]; j++) {
-                // indicate how many similar number in the array 
+                // indicate how many similar number in the array *
                 printf("*");
             }
             // space line 

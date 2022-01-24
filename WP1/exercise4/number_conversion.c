@@ -16,8 +16,10 @@ void bin2hex(long int input);
 // Main program section
 
 int main() {
-	long int bin = 00001111;
+	long int bin = 00001100;
 	system("cls");
+	dec2bin(12);
+	printf("\n");
 	bin2hex(bin);
 }
 
