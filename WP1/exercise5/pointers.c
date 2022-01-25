@@ -16,7 +16,7 @@
 
 // Main program section
 
-//Got few ideas about histogram from here , https://www.geeksforgeeks.org/program-make-histogram-array/
+//Got few ideas about histogram from here , https://www.geeksforgeeks.org/program-make-histogram-array/ , https://www.geeksforgeeks.org/dynamic-memory-allocation-in-c-using-malloc-calloc-free-and-realloc/
 
 // Set a random number in each slot in array  , fill *tab with these numbers
 void create_random(int* tab);

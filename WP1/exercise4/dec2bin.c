@@ -7,24 +7,29 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "bin2hex.h"
 
 // Initialization variables
-int dec2bin(int dec);
 
-void bin2hex(long int input);
+int dec2bin(int dec);
 
 // Main program section
 
-int main() {
-	long int bin = 00001100;
-	system("cls");
-	dec2bin(12);
-	printf("\n");
-	bin2hex(bin);
-}
-
 // Converts a decimal into binary
 // https://www.javatpoint.com/c-program-to-convert-decimal-to-binary
+
+int main(int argc, char* argv[]) {
+
+
+	if (argc > 2) {
+		printf("%d", bin2hex(dec2bin(argv[1])));
+	}
+	else if (argc == 2) {
+		printf("%d", dec2bin(argv[1]));
+	}
+	else { printf("Error"); }
+}
+
 int dec2bin(int dec) {
 	int a[16], i, k, binMod = 0; // Initialize and declare variables
 
@@ -45,18 +50,4 @@ int dec2bin(int dec) {
 	return a; // Return array a
 }
 
-// Converts binary to hexadecimal
-// https://www.tutorialspoint.com/how-to-convert-binary-to-hex-by-using-c-language
-void bin2hex(long int input) {
-	
-	long int binaryval, hexadecimalval = 0, i = 1, remainder; // Initialize and declare variables
-	binaryval = input; //Set variable binaryval to input
-	while (binaryval != 0) { // While the binaryval isn't 0
-		remainder = binaryval % 10; // Set the remainder variable to binaryval divided by 10 using the modulus operator
-		hexadecimalval = hexadecimalval + remainder * i; // To the hexadecimalval variable, add itself plus the remainder * i 
-		i = i * 2; // Double the i variable
-		binaryval = binaryval / 10; // Divide binaryval variable by 10
-	}
-	printf("Equivalent hexadecimal value: %lX", hexadecimalval);
-	return 0;
-}
+
