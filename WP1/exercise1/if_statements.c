@@ -23,7 +23,7 @@ int main() {
             printf("You picked the number 1\n%s", stringQ);
         }
         if (input == 2) {
-            // if the input is 3 , prints out this sentence
+            // if the input is 2 , prints out this sentence
             printf("You picked the number 2\n%s", stringQ);
         }
         if (input == 3) {
