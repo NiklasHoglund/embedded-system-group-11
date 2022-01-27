@@ -12,7 +12,7 @@
 #define MAX 100
 
 // Defining the largest value in an array 
-#define MAXNUMBER 20
+#define MAXNUMBER 10
 
 // Main program section
 
