@@ -20,23 +20,23 @@ int main() {
         scanf_s("%d", &input);
         if (input == 1) {
             // if the input is 1 , prints out this sentence
-            printf("You picked the number 1\n%s", stringQ);
+            printf("If Cinderellas shoe fit perfectly, then why did it fall off?\n%s", stringQ);
         }
         if (input == 2) {
             // if the input is 2 , prints out this sentence
-            printf("You picked the number 2\n%s", stringQ);
+            printf("Papercut: A trees final moment of revenge.\n%s", stringQ);
         }
         if (input == 3) {
             // if the input is 3 , prints out this sentence
-            printf("You picked the number 3\n%s", stringQ);
+            printf("I dont need a hair stylist, my pillow gives me a new hairstyle every morning.\n%s", stringQ);
         }
         if (input == 4) {
             // if the input is 4 , prints out this sentence
-            printf("You picked the number 4\n%s", stringQ);
+            printf("If we should not eat at night, why is there a light in the fridge?\n%s", stringQ);
         }
         if (input == 5) {
             // if the input is 5 , prints out this sentence
-            printf("You picked the number 5\n%s", stringQ);
+            printf("I believe we should all pay our tax bill with a smile. I tried, but they wanted cash.\n%s", stringQ);
         }
  
     } while (input >= 1 && input <= 5);
