@@ -6,17 +6,17 @@
 
 // Main program section
 
-int main(int argc) {
+int main(int argc, char* argv[]) {
 
     system("cls");
-    dec2bin(argc);
+    dec2bin(atoi(argv[1]));
     printf("\n");
 }
 
 // Converts a decimal into binary
 // https://www.javatpoint.com/c-program-to-convert-decimal-to-binary
 int dec2bin(int dec) {
-    int a[16], i, k, binMod = 0; // Initialize and declare variables
+    int a[32], i, k, binMod = 0; // Initialize and declare variables
 
     // For loop that runs while dec is larger than 0
     for (i = 0; dec > 0; i++) {
