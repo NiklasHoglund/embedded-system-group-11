@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define TERMINATING "\nEOF Detected, Ending Program "
 // Main program section
 
 int main(int argc, char* argv[]) {
@@ -18,7 +19,7 @@ int main(int argc, char* argv[]) {
         // A character array which will hold the word the user wants to encrypt
         char word[25];
         printf("Enter something to encrypt: ");
-
+        //Reads n characters (size of our word array at max) from stream using the stdin argument that is standard input stream for taking input. 
         fgets(word, sizeof(word), stdin);
         // For loop that runs once for every character in the word
         for (int i = 0; i < strlen(word); i++){
@@ -59,10 +60,12 @@ int main(int argc, char* argv[]) {
             // Replace the letter at index i with the variable x type-casted to a char
             word[i] = (char)asciiValue;
         }
-
         //If the input != EOF it will print the encrypted word. If the input is EOF it will end the do while loop and terminate the program. 
         if (!feof(stdin)){ 
             printf("Encrypted word: %s\n", word);
         }
     } while (!feof(stdin));
+    
+    printf("%s", TERMINATING);
+    return 0; 
 }
