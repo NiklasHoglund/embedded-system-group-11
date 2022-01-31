@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="bin2hex.c">
+    <ClCompile Include="..\..\..\embedded-system-group-11\Group 11 WP1\bin2hex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

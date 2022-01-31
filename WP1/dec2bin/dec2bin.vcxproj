@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{3ff001bc-00c0-4e09-997b-e5a9a48c2d35}</ProjectGuid>
-    <RootNamespace>exercise4bin2hex</RootNamespace>
+    <ProjectGuid>{8b783bf6-cb6c-4b77-83cd-ef7c1963f5ae}</ProjectGuid>
+    <RootNamespace>dec2bin</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -139,7 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="bin2hex.c" />
+    <ClCompile Include="..\..\..\embedded-system-group-11\Group 11 WP1\dec2bin.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

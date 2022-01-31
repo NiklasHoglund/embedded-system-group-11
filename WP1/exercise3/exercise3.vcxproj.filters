@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="guess_the_number.c">
+    <ClCompile Include="..\..\..\embedded-system-group-11\Group 11 WP1\exercise3.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

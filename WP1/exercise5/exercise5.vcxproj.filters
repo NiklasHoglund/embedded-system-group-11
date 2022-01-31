@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="pointers.c">
+    <ClCompile Include="..\..\..\embedded-system-group-11\Group 11 WP1\exercise5.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
