@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\embedded-system-group-11\Group 11 WP1\dec2bin.c">
+    <ClCompile Include="dec2bin.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

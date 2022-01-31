@@ -1,4 +1,4 @@
-// (C) Ahmed Yasser/ Axel Broberg/ Niklas HÃ¶glund , group: 11 (2022)
+// (C) Ahmed Yasser/ Axel Broberg/ Niklas Höglund , group: 11 (2022)
 // Work package 1
 // Exercise 3
 // Submission code: 11AAAAAA
@@ -34,7 +34,7 @@ void guessGame(int number)
     // Do-While loops until the user guesses the random number correctly
     do {
         // Limit to the number of times the user can guess (100 times)
-        if (numberGuess > AA ) {
+        if (numberGuess > AA) {
             break;
         }
         // User's input a number , while loop here makes sure the scanned input is an integer not char , to avoid crashing and assures integer is entered

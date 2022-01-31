@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{d4953396-73a8-44af-8e59-5c3f5319c0b0}</ProjectGuid>
+    <ProjectGuid>{9e159bc8-2e8b-4e02-a8b4-9ef5bdb6246a}</ProjectGuid>
     <RootNamespace>bin2hex</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -139,7 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\embedded-system-group-11\Group 11 WP1\bin2hex.c" />
+    <ClCompile Include="bin2hex.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

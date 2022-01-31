@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{eb7d26a3-c298-4fd6-b5ea-ee6779d095a0}</ProjectGuid>
+    <ProjectGuid>{0eaffaf8-5725-45b4-a33b-96e151937513}</ProjectGuid>
     <RootNamespace>exercise2</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -139,7 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\embedded-system-group-11\Group 11 WP1\exercise2.c" />
+    <ClCompile Include="exercise2.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

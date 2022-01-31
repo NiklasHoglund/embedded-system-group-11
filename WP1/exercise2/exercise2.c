@@ -1,4 +1,4 @@
-// (C) Ahmed Yasser/ Axel Broberg/ Niklas HÃ¶glund , group: 11 (2022)
+// (C) Ahmed Yasser/ Axel Broberg/ Niklas Höglund , group: 11 (2022)
 // Work package 1
 // Exercise 2
 // Submission code: 11AAAAAA
@@ -22,7 +22,7 @@ int main(int argc, char* argv[]) {
         //Reads n characters (size of our word array at max) from stream using the stdin argument that is standard input stream for taking input. 
         fgets(word, sizeof(word), stdin);
         // For loop that runs once for every character in the word
-        for (int i = 0; i < strlen(word); i++){
+        for (int i = 0; i < strlen(word); i++) {
 
             int upper_case = (65 <= word[i] && word[i] <= 90);
             int lower_case = (97 <= word[i] && word[i] <= 122);
@@ -61,11 +61,11 @@ int main(int argc, char* argv[]) {
             word[i] = (char)asciiValue;
         }
         //If the input != EOF it will print the encrypted word. If the input is EOF it will end the do while loop and terminate the program. 
-        if (!feof(stdin)){ 
+        if (!feof(stdin)) {
             printf("Encrypted word: %s\n", word);
         }
     } while (!feof(stdin));
-    
+
     printf("%s", TERMINATING);
-    return 0; 
+    return 0;
 }

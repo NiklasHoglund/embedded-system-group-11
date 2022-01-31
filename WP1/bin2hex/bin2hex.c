@@ -13,7 +13,7 @@
 
 // Initialize functions
 int bin2hex();
-bool ifBinary(int num); 
+bool ifBinary(int num);
 
 // Main program section
 int main() {
@@ -31,12 +31,12 @@ int bin2hex() {
     printf("Enter the binary number: ");
     // recieve the user input
     scanf_s("%ld", &binaryval);
-    
+
     // Check if variable is binary
     if (!ifBinary(binaryval)) {
         printf("%s", "This is not a binary value.\n");
         return 0;
-    } 
+    }
 
     // logic math behind converting bin to hex
     while (binaryval != 0) { // While the binaryval isn't 0
@@ -46,14 +46,14 @@ int bin2hex() {
         binaryval = binaryval / 10; // Divide binaryval variable by 10
     }
 
-    return hexadecimalval;  
+    return hexadecimalval;
 }
 
 // Function for checking if integer is in binary format
 // Idea got from here: https://quescol.com/interview-preparation/whether-or-not-a-given-number-format-is-a-binary-in-c
 bool ifBinary(int num) {
     int j = 0; // Remainder variable
-    while (num  > 0) // While num is still a number
+    while (num > 0) // While num is still a number
     {
         j = num % 10; // Get remainder
         if ((j != 0) && (j != 1)) // Check if it's 0 or 1

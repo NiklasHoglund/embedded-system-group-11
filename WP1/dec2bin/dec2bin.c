@@ -36,7 +36,7 @@ int dec2bin(int dec) {
         a[i] = dec % 2; // Divide the decimal number by 2 with the modulus operator
         dec = dec / 2; // Divide the decimal number by 2 with the division operator
     }
-    
+
     // For loop for checking if any number in the array isn't 1 or 0
     for (int j = 0; j < sizeof(a); j++)
     {
