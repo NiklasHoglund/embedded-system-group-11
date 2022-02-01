@@ -55,16 +55,16 @@ void printfile(); // Prints out all persons in the file
 void printfile() {
     FILE* fptr;	// file which we will create
     errno_t err;
-    PERSON* ppost = NULL;
-    char* buf[15];
-
+    PERSON ppost;
 
     err = fopen_s(&fptr, "database.bin", "rb");
     if (err == 0) {
-        while (!feof(fptr)) {
-            fread(&buf, sizeof(char), 10, fptr);
-            printf("\n %.*s", sizeof(&buf)+2, &buf);
 
+        while(!feof(fptr)){
+            fread(&ppost, sizeof(PERSON), 1, fptr);
+            printf("%s", ppost.firstname);
+            printf("%s", ppost.famname);
+            printf("%s", ppost.pers_number);
         }
     }
     else {
@@ -73,12 +73,38 @@ void printfile() {
     }
     
     fclose(fptr);
-
 }
 
 
 void search_by_firstname(char* name); // Prints out the person if // in list
-void search_by_firstname(char* name);
+void search_by_firstname(char* name) {
+    FILE* fptr;	// file which we will create
+    errno_t err;
+    PERSON ppost;
+    char firstname[20];
+
+    printf("Enter first name of person: ");
+    scanf_s("\n%s", &firstname, 20);
+
+    err = fopen_s(&fptr, "database.bin", "rb");
+
+    if (err == 0) {
+
+        printf("x");
+        while (fread(&ppost, sizeof(PERSON), 5, fptr)) {
+            if (ppost.firstname == firstname) {
+                printf("Success %s", ppost.firstname);
+            }
+            printf("Failed %s", ppost.firstname);
+            printf("Failed %s", ppost.famname);
+
+            
+        }
+    }
+
+
+
+}
 
 void append_file(PERSON* inrecord); // appends a new person to the file
 
@@ -105,20 +131,31 @@ void append_file(PERSON* inrecord) {
     err = fopen_s(&fptr, "C:\database.bin", "ab");
     if (err == 0)
     {
-        printf("New user has been added\n");
+        printf("\nNew user has been addedn\n");
     }
     else
     {
         printf("\nThe file is not created\n");
     }
 
-    strncpy_s(ppost.firstname, MAX, firstname, 20);
+    char* newfirstname = malloc(strlen(firstname) + 2);
+    strcpy_s(newfirstname, 20, firstname);
+    strcat_s(newfirstname, 20, "\n");
+    strncpy_s(ppost.firstname, MAX, newfirstname, 20);
     fwrite(&ppost.firstname, sizeof(ppost.firstname), 1, fptr);
 
-    strncpy_s(ppost.famname, MAX, famname, 20);
+
+    char* newfamname = malloc(strlen(famname) + 2);
+    strcpy_s(newfamname, 20, famname);
+    strcat_s(newfamname, 20, "\n");
+    strncpy_s(ppost.famname, MAX, newfamname, 20);
     fwrite(&ppost.famname, sizeof(ppost.famname), 1, fptr);
 
-    strncpy_s(ppost.pers_number, MAX, pernum, 20);
+
+    char* newpernum = malloc(strlen(pernum) + 2);
+    strcpy_s(newpernum, 20, pernum);
+    strcat_s(newpernum, 20, "\n");
+    strncpy_s(ppost.pers_number, MAX, newpernum, 20);
     fwrite(&ppost.pers_number, sizeof(ppost.pers_number), 1, fptr);
 
     fclose(fptr);
@@ -151,7 +188,7 @@ int main(void) {
 
         }
         else if (choice == 3) {
-
+            search_by_firstname(NULL);
 
         }
         else if (choice == 4) {
