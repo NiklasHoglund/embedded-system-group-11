@@ -73,7 +73,7 @@ void printfile(void) {
         // we can do something with it
         // here I chose to read a string from the file
 
-        char cValToRead = '0';	// value to read, initialized with 0 just to reserve some space
+        char cValToRead[MAX];	// value to read, initialized with 0 just to reserve some space
 
         fread(&cValToRead,				// where we store the value
             sizeof(cValToRead),		// the size of the single element
@@ -81,7 +81,7 @@ void printfile(void) {
             fptr);			// where we should read them from (file)
 
       // and print the result on the console
-        printf("%c \n", cValToRead);
+        printf("%s \n", cValToRead);
 
         // now, version with the buffer
         char* pstrBuffer;
@@ -96,11 +96,11 @@ void printfile(void) {
             // read the number of elements to the buffer
             fread(pstrBuffer,
                 sizeof(char),
-                MAX - 1,
+                MAX,
                 fptr);
 
             // end of string in order to avoid printing random memory content
-            pstrBuffer[MAX - 1] = '\0';
+            pstrBuffer[MAX-1] ;
 
             // let's print them and see what happens
             printf("%s \n", pstrBuffer);
@@ -113,8 +113,6 @@ void printfile(void) {
             printf("Error - memory could not be allocated!");
         }
 
-        // and please remember to close the file
-        // if we do not close the file, the data may be lost
         fclose(fptr);
     }
     else	// if the file was not opened, e.g. does not exists
@@ -139,7 +137,7 @@ void append_file(PERSON* inrecord) {
     err = fopen_s(&fptr, "C:\database.bin", "ab");
     if (err == 0)
     {
-        printf("New user has been addedn\n");
+        printf("New user has been added\n");
     }
     else
     {
