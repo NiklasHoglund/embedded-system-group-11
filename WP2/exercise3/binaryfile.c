@@ -50,75 +50,29 @@ void write_new_file(PERSON* inrecord) {
     fclose(fptr);
 }
 
-void printfile(void); // Prints out all persons in the file
+void printfile(); // Prints out all persons in the file
 
-void printfile(void) {
+void printfile() {
     FILE* fptr;	// file which we will create
     errno_t err;
-    PERSON ppost;
-// location to my file
-// let's use the same file as before to check how the reading looks like
-    char* fileName = "C:\database.bin";
+    PERSON* ppost = NULL;
+    char* buf[15];
 
-    // open the file to read
-    // Note! to read binary file we need to change the modifier - rb instead of just r
-    err = fopen_s(&fptr, fileName, "rb");
 
-    // a good practice when working with files is to check
-    // that the file pointer is correct, i.e. the file was opened
-    // in the way we wanted
-    if (err == NULL)
-    {
-        // if the file was opened (see the flag)
-        // we can do something with it
-        // here I chose to read a string from the file
+    err = fopen_s(&fptr, "database.bin", "rb");
+    if (err == 0) {
+        while (!feof(fptr)) {
+            fread(&buf, sizeof(char), 10, fptr);
+            printf("\n %.*s", sizeof(&buf)+2, &buf);
 
-        char cValToRead[MAX];	// value to read, initialized with 0 just to reserve some space
-
-        fread(&cValToRead,				// where we store the value
-            sizeof(cValToRead),		// the size of the single element
-            1,						// how many elements we should read
-            fptr);			// where we should read them from (file)
-
-      // and print the result on the console
-        printf("%s \n", cValToRead);
-
-        // now, version with the buffer
-        char* pstrBuffer;
-
-        // reserve a place in memory for MAX characters
-        pstrBuffer = malloc(MAX * sizeof(char));
-
-        // now, let's make it fail safe wrt memory
-        // and check if the memory was actually allocated
-        if (pstrBuffer != NULL)
-        {
-            // read the number of elements to the buffer
-            fread(pstrBuffer,
-                sizeof(char),
-                MAX,
-                fptr);
-
-            // end of string in order to avoid printing random memory content
-            pstrBuffer[MAX-1] ;
-
-            // let's print them and see what happens
-            printf("%s \n", pstrBuffer);
-
-            // don't forget to free the memory
-            free(pstrBuffer);
         }
-        else // the memory could not be allocated
-        {
-            printf("Error - memory could not be allocated!");
-        }
-
-        fclose(fptr);
     }
-    else	// if the file was not opened, e.g. does not exists
-    {
-        printf("Error opening file %s.", fileName);
+    else {
+        printf("\n Can not open file");
+        exit(1);
     }
+    
+    fclose(fptr);
 
 }
 
@@ -133,6 +87,20 @@ void append_file(PERSON* inrecord) {
     PERSON ppost;
     FILE* fptr;
 
+    char firstname[20];
+    char famname[20];
+    char pernum[20];
+
+    printf("Add new person to database.\nFirst name: ");
+    scanf_s("\n%s", &firstname, 20);
+
+    printf("\nFamily name: ");
+    scanf_s("\n%s", &famname, 20);
+
+    printf("\nPersonal number: ");
+    scanf_s("\n%s", &pernum, 20);
+
+
     // Open for read  
     err = fopen_s(&fptr, "C:\database.bin", "ab");
     if (err == 0)
@@ -141,16 +109,16 @@ void append_file(PERSON* inrecord) {
     }
     else
     {
-        printf("The file is not created\n");
+        printf("\nThe file is not created\n");
     }
 
-    strncpy_s(ppost.firstname, MAX, "\nFrank\n", 6);
+    strncpy_s(ppost.firstname, MAX, firstname, 20);
     fwrite(&ppost.firstname, sizeof(ppost.firstname), 1, fptr);
 
-    strncpy_s(ppost.famname, MAX, "Castle\n", 7);
+    strncpy_s(ppost.famname, MAX, famname, 20);
     fwrite(&ppost.famname, sizeof(ppost.famname), 1, fptr);
 
-    strncpy_s(ppost.pers_number, MAX, "20050101112\n", 13);
+    strncpy_s(ppost.pers_number, MAX, pernum, 20);
     fwrite(&ppost.pers_number, sizeof(ppost.pers_number), 1, fptr);
 
     fclose(fptr);
