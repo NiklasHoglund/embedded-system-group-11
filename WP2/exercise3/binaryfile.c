@@ -8,11 +8,13 @@
 #include <stdio.h>
 #include <string.h>
 
+#define MAX 20
+
 // -----typedefs -------
 typedef struct  {
-    char firstname[10];
-    char famname[10];
-    char pers_number[10]; // yyyymmddnnnc
+    char firstname[20];
+    char famname[20];
+    char pers_number[20]; // yyyymmddnnnc
 } PERSON;
 
 // Function declaration (to be extend)
@@ -35,60 +37,134 @@ void write_new_file(PERSON* inrecord) {
     {
         printf("The file is not created\n");
     }
-    char* s = "Ahmed";
-    strncpy_s(ppost.firstname, 10, "Ahmed", 5);
-    fwrite(&ppost.firstname, sizeof(s), 1, fptr);
 
-    strncpy_s(ppost.famname, 10, "Yasser", 5);
-    strncpy_s(ppost.pers_number, 10, "20011013", 4);
+    strncpy_s(ppost.firstname, MAX, "Matt\n", 5);
+    fwrite(&ppost.firstname, sizeof(ppost.firstname), 1, fptr);
 
-    fwrite(&ppost, sizeof(ppost), 1, fptr);
+    strncpy_s(ppost.famname, MAX, "Murdock\n", 8);
+    fwrite(&ppost.famname, sizeof(ppost.famname), 1, fptr);
+
+    strncpy_s(ppost.pers_number, MAX, "200010016475\n", 13);
+    fwrite(&ppost.pers_number, sizeof(ppost.pers_number), 1, fptr);
 
     fclose(fptr);
-
 }
+
 void printfile(void); // Prints out all persons in the file
-void printfile() {
 
-    FILE* fptr;
+void printfile(void) {
+    FILE* fptr;	// file which we will create
+    errno_t err;
+    PERSON ppost;
+// location to my file
+// let's use the same file as before to check how the reading looks like
+    char* fileName = "C:\database.bin";
 
-    char filename[100], c;
+    // open the file to read
+    // Note! to read binary file we need to change the modifier - rb instead of just r
+    err = fopen_s(&fptr, fileName, "rb");
 
-    printf("Enter the filename to open \n");
-    scanf_s("%s", filename);
-
-    // Open file
-    fptr = fopen_s(&fptr ,filename, "wb");
-    if (fptr == NULL)
+    // a good practice when working with files is to check
+    // that the file pointer is correct, i.e. the file was opened
+    // in the way we wanted
+    if (err == NULL)
     {
-        printf("Cannot open file \n");
-        exit(0);
+        // if the file was opened (see the flag)
+        // we can do something with it
+        // here I chose to read a string from the file
+
+        char cValToRead = '0';	// value to read, initialized with 0 just to reserve some space
+
+        fread(&cValToRead,				// where we store the value
+            sizeof(cValToRead),		// the size of the single element
+            1,						// how many elements we should read
+            fptr);			// where we should read them from (file)
+
+      // and print the result on the console
+        printf("%c \n", cValToRead);
+
+        // now, version with the buffer
+        char* pstrBuffer;
+
+        // reserve a place in memory for MAX characters
+        pstrBuffer = malloc(MAX * sizeof(char));
+
+        // now, let's make it fail safe wrt memory
+        // and check if the memory was actually allocated
+        if (pstrBuffer != NULL)
+        {
+            // read the number of elements to the buffer
+            fread(pstrBuffer,
+                sizeof(char),
+                MAX - 1,
+                fptr);
+
+            // end of string in order to avoid printing random memory content
+            pstrBuffer[MAX - 1] = '\0';
+
+            // let's print them and see what happens
+            printf("%s \n", pstrBuffer);
+
+            // don't forget to free the memory
+            free(pstrBuffer);
+        }
+        else // the memory could not be allocated
+        {
+            printf("Error - memory could not be allocated!");
+        }
+
+        // and please remember to close the file
+        // if we do not close the file, the data may be lost
+        fclose(fptr);
+    }
+    else	// if the file was not opened, e.g. does not exists
+    {
+        printf("Error opening file %s.", fileName);
     }
 
-    // Read contents from file
-    c = fgetc(fptr);
-    while (c != EOF)
-    {
-        printf("%c", c);
-        c = fgetc(fptr);
-    }
-
-    fclose(fptr);
 }
 
 
 void search_by_firstname(char* name); // Prints out the person if // in list
+void search_by_firstname(char* name);
 
 void append_file(PERSON* inrecord); // appends a new person to the file
+
+void append_file(PERSON* inrecord) {
+    errno_t err;
+    PERSON ppost;
+    FILE* fptr;
+
+    // Open for read  
+    err = fopen_s(&fptr, "C:\database.bin", "ab");
+    if (err == 0)
+    {
+        printf("New user has been addedn\n");
+    }
+    else
+    {
+        printf("The file is not created\n");
+    }
+
+    strncpy_s(ppost.firstname, MAX, "\nFrank\n", 6);
+    fwrite(&ppost.firstname, sizeof(ppost.firstname), 1, fptr);
+
+    strncpy_s(ppost.famname, MAX, "Castle\n", 7);
+    fwrite(&ppost.famname, sizeof(ppost.famname), 1, fptr);
+
+    strncpy_s(ppost.pers_number, MAX, "20050101112\n", 13);
+    fwrite(&ppost.pers_number, sizeof(ppost.pers_number), 1, fptr);
+
+    fclose(fptr);
+}
+
 
 int main(void) {
     // Initilizations
     int choice;
-    int n;
-
     //Main program menu 
     while (1) {
-        printf("Welcome to your database, Choose an option from below : \n \n");
+        printf("\nWelcome to your database, Choose an option from below : \n \n");
         printf("1. Create a new and delete the old file.\n");
         printf("2. Add a new person to the file.\n");
         printf("3. Search for a person in the file.\n");
@@ -105,7 +181,7 @@ int main(void) {
 
         }
         else if (choice == 2) {
-
+            append_file(NULL);
 
         }
         else if (choice == 3) {
@@ -113,8 +189,7 @@ int main(void) {
 
         }
         else if (choice == 4) {
-
-            printfile(NULL);
+            printfile();
         }
         else if (choice == 5) {
             exit(0);
@@ -123,7 +198,5 @@ int main(void) {
             break;
         }
     }
-
-
     return(0);
 }
