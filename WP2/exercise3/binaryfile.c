@@ -18,7 +18,7 @@ typedef struct  {
 } PERSON;
 
 // Function declaration (to be extend)
-PERSON input_record(void); // Reads a person’s record.
+// PERSON input_record(void); // Reads a person’s record.
 
 void write_new_file(PERSON* inrecord); // Creates a file and// writes the first record
 
@@ -74,7 +74,23 @@ void printfile() {
     
     fclose(fptr);
 }
+ // link were we got ideas for this terminate string func : https://www.delftstack.com/howto/c/trim-string-in-c/
+char* trimString(char* str)
+{
+    char* end; // Initialization
 
+    while (isspace((unsigned char)*str)) str++;
+
+    if (*str == 0)
+        return str; // prints out normally
+
+    end = str + strlen(str) - 1;
+    while (end > str && isspace((unsigned char)*end)) end--;
+
+    end[1] = '\0'; // terminate the string char
+
+    return str;
+}
 
 void search_by_firstname(char* name); // Prints out the person if // in list
 void search_by_firstname(char* name) {
@@ -87,16 +103,20 @@ void search_by_firstname(char* name) {
     scanf_s("\n%s", &firstname, 20);
 
     err = fopen_s(&fptr, "database.bin", "rb");
+    int x;
 
     if (err == 0) {
 
-        printf("x");
-        while (fread(&ppost, sizeof(PERSON), 5, fptr)) {
-            if (ppost.firstname == firstname) {
-                printf("Success %s", ppost.firstname);
+        while (fread(&ppost, sizeof(PERSON), 1, fptr)) {
+            trimString(ppost.firstname);
+            x = strcmp(ppost.firstname, firstname);
+
+            if (strcmp(ppost.firstname, firstname) == 0) {
+                printf("Found first name : %s\n", ppost.firstname);
+                printf("Found family name : %s\n", ppost.famname);
+                printf("Found personal number : %s\n", ppost.pers_number);
             }
-            printf("Failed %s", ppost.firstname);
-            printf("Failed %s", ppost.famname);
+          //  printf("Failed %s", ppost.firstname);
 
             
         }
@@ -105,6 +125,7 @@ void search_by_firstname(char* name) {
 
 
 }
+
 
 void append_file(PERSON* inrecord); // appends a new person to the file
 
@@ -131,7 +152,7 @@ void append_file(PERSON* inrecord) {
     err = fopen_s(&fptr, "C:\database.bin", "ab");
     if (err == 0)
     {
-        printf("\nNew user has been addedn\n");
+        printf("\nNew user has been added\n");
     }
     else
     {
@@ -180,24 +201,33 @@ int main(void) {
         // if statement according to the user's input, so it will display whats requested
         if (choice == 1) {
 
+            // calls the fucntion ,creates a new binary file and delete the old one
             write_new_file(NULL);
 
         }
         else if (choice == 2) {
+
+            // calls the fucntion ,add new person database to the binary file
             append_file(NULL);
 
         }
         else if (choice == 3) {
+
+            // calls the fucntion , search by the first name of the person to show all persons info with that name
             search_by_firstname(NULL);
 
         }
         else if (choice == 4) {
+
+            // calls the fucntion , displays the whole binary file content
             printfile();
         }
         else if (choice == 5) {
+            // exits the system
             exit(0);
         }
         else {
+            // breaks while loop if the user enters wrong input
             break;
         }
     }
