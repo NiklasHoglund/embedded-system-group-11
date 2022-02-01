@@ -81,15 +81,14 @@ void movement(ROBOT *robot, char *moveCommands) {           /*Movement Function.
     int length = strlen(moveCommands);
     for (i = 0; i<length ; i++) {
         if (moveCommands[i] == 'm') {
-            printf("Moving from x:%d y:%d" ,robot->xpos, robot->ypos);
-            move(robot, moveCommands); 
-            printf(" to x:%d y:%d \n", robot->xpos, robot->ypos);
+            move(robot); 
+            printf("Moving to x:%d y:%d \n", robot->xpos, robot->ypos);
         }else if(moveCommands[i] == 't') {
-            turn(robot, moveCommands); 
+            turn(robot); 
             printf("Turned to %c\n", robot->dir);
         }
         else {
             printf("Wrong Input Robot Ignoring Command\n");
         }
-    }
+    } printf("Final position of Robot\n XY (%d,%d) Facing: %c \n", robot->xpos, robot->ypos, robot->dir); 
 }
