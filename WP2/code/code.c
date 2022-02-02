@@ -53,11 +53,3 @@ int check_values(int nr, int x) {
 	}
 	return 0;
 }
-
-void print_byte_as_bits(char val)
-{
-	for (int i = 7; 0 <= i; i--)
-	{
-		printf("%c", (val & (1 << i)) ? '1' : '0');
-	}
-}
