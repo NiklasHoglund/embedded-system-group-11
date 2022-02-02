@@ -10,14 +10,14 @@
 
 int main(int argc, char* argv[])
 {
-    char engine_on, gear_pos, key_pos, brake1, brake2;
+    char engine_on, gear_pos, key_pos, brake1, brake2; // Char values used for printing
 
-    printf("\nInserted hexadecimal value: %s", argv[1]);
-    char hexa[3] = { argv[1][0], argv[1][1] }, bin[9] = "";
+    char hexa[3] = { argv[1][0], argv[1][1] }, bin[9] = ""; // Char array hexa which holds the argument passed
+                                                            // Char array bin to hold the binary number extracted from the hex number
 
-    for (int i = 0; hexa[i] != '\0'; i++)
+    for (int i = 0; hexa[i] != '\0'; i++) // For loop which loops once for each character in the hex number
     {
-        switch (hexa[i])
+        switch (hexa[i]) // Switch case used for converting the hex letters to binary. It concats the binary into the bin array
         {
         case '0':
             strcat(bin, "0000");
@@ -78,9 +78,9 @@ int main(int argc, char* argv[])
         }
     }
 
-    engine_on = bin[0];
+    engine_on = bin[0]; // Set the engine_on variable to bin[0]
 
-    if (bin[1] == '1') {
+    if (bin[1] == '1') { // If statement for checking which bit out of the 3 is on for gear_pos
         gear_pos = '3';
     } else if (bin[2] == '1') {
         gear_pos = '2';
@@ -91,8 +91,8 @@ int main(int argc, char* argv[])
     else {
         gear_pos = '0';
     }
-
-    if (bin[4] == '1') {
+    
+    if (bin[4] == '1') { // If statement for checking which bit out of the 2 is on for key_pos
         key_pos = '2';
     }
     else if (bin[5] == '1') {
@@ -102,8 +102,11 @@ int main(int argc, char* argv[])
         key_pos = '0';
     }
 
-    brake1 = bin[6];
-    brake2 = bin[7];
+    brake1 = bin[6]; // Set the brake1 variable to bin[6]
+    brake2 = bin[7]; // Set the brake2 variable to bin[7]
+
+
+    // Print the variables
 
     printf("\nengine_on: %c", engine_on);
     printf("\ngear_pos: %c", gear_pos);
