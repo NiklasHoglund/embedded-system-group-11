@@ -37,17 +37,19 @@ void write_new_file(PERSON* inrecord) {
     {
         printf("The file is not created\n");
     }
-
-    strncpy_s(ppost.firstname, MAX, "Matt\n", 5);
+    
+    strncpy_s(ppost.firstname, 6, "Matt\n", 5); // play around MAX
     fwrite(&ppost.firstname, sizeof(ppost.firstname), 1, fptr);
 
-    strncpy_s(ppost.famname, MAX, "Murdock\n", 8);
+    strncpy_s(ppost.famname, 9, "Murdock\n", 8);
     fwrite(&ppost.famname, sizeof(ppost.famname), 1, fptr);
 
-    strncpy_s(ppost.pers_number, MAX, "200010016475\n", 13);
+    strncpy_s(ppost.pers_number, 14, "200010016475\n", 13);
     fwrite(&ppost.pers_number, sizeof(ppost.pers_number), 1, fptr);
 
     fclose(fptr);
+
+    fptr = NULL;
 }
 
 void printfile(); // Prints out all persons in the file
@@ -59,13 +61,13 @@ void printfile() {
 
     err = fopen_s(&fptr, "database.bin", "rb");
     if (err == 0) {
+        
+        while(fread(&ppost, sizeof(PERSON), 1, fptr) == 1) {
+                printf("%s", ppost.firstname);
+                printf("%s", ppost.famname);
+                printf("%s", ppost.pers_number);
 
-        while(!feof(fptr)){
-            fread(&ppost, sizeof(PERSON), 1, fptr);
-            printf("%s", ppost.firstname);
-            printf("%s", ppost.famname);
-            printf("%s", ppost.pers_number);
-        }
+            }
     }
     else {
         printf("\n Can not open file");
@@ -113,7 +115,7 @@ void search_by_firstname(char* name) {
 
             if (strcmp(ppost.firstname, firstname) == 0) {
                 printf("Found first name : %s\n", ppost.firstname);
-                printf("Found family name : %s\n", ppost.famname);
+                printf("Found family name : %s", ppost.famname);
                 printf("Found personal number : %s\n", ppost.pers_number);
             }
           //  printf("Failed %s", ppost.firstname);
