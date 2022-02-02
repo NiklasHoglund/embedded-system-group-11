@@ -20,16 +20,19 @@ REGTYPE* add_first(REGTYPE* temp, int data);
 int main(int argc, char* argv[])
 {
 	int nr = 0;
-	REGTYPE* act_post, * head = NULL;
+	REGTYPE* act_post, * head = NULL, * firstNode = NULL;
+
 	srand(time(0)); // Random seed
-	int rNum = rand() % 10;
-	printf("\nRand: %d", rNum);
-	head = random_list(rNum);
+	head = random_list(MAX);
 	act_post = head;
+
+	add_first(head, 1337);
+
 	while (act_post != NULL) {
 		printf("\n Post nr %d : %d", nr++, act_post->number);
 		act_post = act_post->next;
 	}
+
 
 	// --- Free the allocated memory ---
 	while ((act_post = head) != NULL) {
@@ -37,24 +40,25 @@ int main(int argc, char* argv[])
 		free(act_post);
 	}
 
-
 	return 0;
 }
 
+// Friendly Indian guy helped us: https://www.youtube.com/watch?v=7Fz7JSvlr9g&ab_channel=BBarters
 // ==== End of main ======================================
 REGTYPE* random_list(int nr) {
 	int i = 0;
 	REGTYPE* top = NULL, * old = NULL, * item = NULL;
 	
+
 	for (i = 0; i < nr; i++)
 	{
+		int rNum = rand() % 100;
 		//create individual node
 		old = (REGTYPE*)malloc(sizeof(REGTYPE));
-		printf("\nEnter the data for node number %d: ", i + 1);
-		scanf_s("%d", &(old->number));
+		old->number = rNum;
 		old->next = NULL;
-
-		if (top == NULL) { //if list is currently empty, then make old as top
+		
+		if (top == NULL) { //if top is empty -> make old as top
 			top = old;
 		}
 		else
@@ -70,6 +74,11 @@ REGTYPE* random_list(int nr) {
 	return(top);
 }
 
+// Source: my big brain
 //==========================================================
 REGTYPE* add_first(REGTYPE* temp, int data) {
-}
+	
+	REGTYPE* node = (REGTYPE*)malloc(sizeof(REGTYPE));;
+
+	temp->number = data;
+	node->next = temp;	return(node);}
