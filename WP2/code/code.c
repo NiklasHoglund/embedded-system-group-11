@@ -9,8 +9,6 @@
 int check_values(int nr, int x);
 
 
-void print_byte_as_bits(char val);
-
 int main(int argc, char* argv[])
 {
 	unsigned char byte = 0;
