@@ -1,6 +1,6 @@
-// (C) Ahmed Yasser, Axel Broberg, Niklas Höglund , group: 11 (2022)
+// (C) Ahmed Yasser, Axel Broberg, Niklas HÃ¶glund , group: 11 (2022)
 // Work package 2
-// Exercise 1
+// Exercise 4
 // Submission code: 
 
 #include <stdio.h> // print,scan and getchar
