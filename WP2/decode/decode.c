@@ -77,29 +77,41 @@ int main(int argc, char* argv[])
             printf("Invalid hexadecimal input.");
         }
     }
+    printf("\nBinary: %s\n", bin);
 
     engine_on = bin[0]; // Set the engine_on variable to bin[0]
 
-    if (bin[1] == '1') { // If statement for checking which bit out of the 3 is on for gear_pos
+    if (bin[1] == '0' && bin[2] == '1' && bin[3] == '1') { // If statement for checking bit values in order to give a gear position
         gear_pos = '3';
-    } else if (bin[2] == '1') {
+    } else if (bin[1] == '0' && bin[2] == '1' && bin[3] == '0') {
         gear_pos = '2';
     }
-    else if(bin[3] == '1') {
+    else if(bin[1] == '0' && bin[2] == '0' && bin[3] == '1') {
         gear_pos = '1';
     }
-    else {
+    else if (bin[1] == '0' && bin[2] == '0' && bin[3] == '0') {
         gear_pos = '0';
     }
-    
-    if (bin[4] == '1') { // If statement for checking which bit out of the 2 is on for key_pos
-        key_pos = '2';
-    }
-    else if (bin[5] == '1') {
-        key_pos = '1';
+    else if (bin[1] == '1' && bin[2] == '1' && bin[3] == '1') {
+        gear_pos = '4';
     }
     else {
+        printf("That gear is too big. Defaulting to 4");
+        gear_pos = '4';
+    }
+    
+    if (bin[4] == '0' && bin[5] == '0') { // If statement for checking bit values in order to give a key position
         key_pos = '0';
+    }
+    else if (bin[4] == '0' && bin[5] == '1') {
+        key_pos = '1';
+    }
+    else if (bin[4] == '1' && bin[5] == '0') {
+        key_pos = '2';
+    }
+    else {
+        printf("Invalid key position. Defaulting to key position 2");
+        key_pos = '2';
     }
 
     brake1 = bin[6]; // Set the brake1 variable to bin[6]
