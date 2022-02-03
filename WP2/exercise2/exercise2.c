@@ -47,18 +47,18 @@ int main(int argc, char* argv[])
 REGTYPE* random_list(int nr) {
 	int i = 0; // Iterator for the for loop
 	REGTYPE* top = NULL, * old = NULL, * item = NULL; // Defines three nodes (REGTYPE objects)
-	
+
 
 	for (i = 0; i < nr; i++) // For loop which loops once for each node in the linked list
 	{
 		int rNum = rand() % 100; // Randomizes a value to give the number variable in each node
-		
+
 		// ========= Create an isolated node =========
 		old = (REGTYPE*)malloc(sizeof(REGTYPE)); // Create a node
 		old->number = rNum; // Store the randomized value
 		old->next = NULL; // The new node shouldn't have any nodes following it (since its isolated)
 		// ===========================================
-		
+
 		if (top == NULL) { // If the linked list is empty
 			top = old; // Top becomes the newly created node (old)
 		}
@@ -80,4 +80,7 @@ REGTYPE* add_first(REGTYPE* temp, int data) {
 	
 	REGTYPE* node = (REGTYPE*)malloc(sizeof(REGTYPE)); // Create a node
 	temp->number = data; // Set the value of the node passed into the function to the data variable passed
-	node->next = temp; // Set the node following (node) to the node passed	return(node); // Returns the new node}
+	node->next = temp; // Set the node following (node) to the node passed
+
+	return(node); // Returns the new node
+}
