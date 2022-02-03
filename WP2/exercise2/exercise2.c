@@ -1,6 +1,6 @@
 // (C) Ahmed Yasser, Axel Broberg, Niklas Höglund , group: 11 (2022)
 // Work package 2
-// Exercise 1
+// Exercise 2
 // Submission code: B11BBBBB
 
 #include <stdio.h>
