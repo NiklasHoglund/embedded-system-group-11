@@ -1,7 +1,7 @@
 // (C) Ahmed Yasser, Axel Broberg, Niklas Höglund , group: 11 (2022)
 // Work package 2
 // Exercise 3
-// Submission code: 
+// Submission code: B11BBBBB
 
 // Include section
 #include <stdlib.h>
@@ -12,23 +12,23 @@
 #define MAX 20
 
 // -----typedefs -------
-typedef struct  {
+typedef struct {
     char firstname[20];
     char famname[20];
     char pers_number[20]; // yyyymmddnnnc
 } PERSON;
 
 // Function declarations
- 
+
 // PERSON input_record(void);
 
-void write_new_file(PERSON* inrecord); 
+void write_new_file(PERSON* inrecord);
 // Creates a new file and writes the first hardcoded record
 
 // helpful links for ALL syntaxes https://www.programiz.com/c-programming/c-file-input-output , https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/fopen-s-wfopen-s?view=msvc-170
 void write_new_file(PERSON* inrecord) {
     // Intializations
-    errno_t err; 
+    errno_t err;
     PERSON ppost; // PERSON class
     FILE* fptr; //  pointer to file that will get created
 
@@ -44,10 +44,10 @@ void write_new_file(PERSON* inrecord) {
     {
         printf("The file is not created\n");
     }
-    
+
     // Used strncpy for the hardcoded first person record
     //Copying the characters then fwrite to send it to the binary file with its assigned value and place (pointing to certain memory to write)
-    strncpy_s(ppost.firstname, 6, "Matt\n", 5); 
+    strncpy_s(ppost.firstname, 6, "Matt\n", 5);
     fwrite(&ppost.firstname, sizeof(ppost.firstname), 1, fptr);
 
     strncpy_s(ppost.famname, 9, "Murdock\n", 8);
@@ -62,7 +62,7 @@ void write_new_file(PERSON* inrecord) {
     fptr = NULL;
 }
 
-void printfile(); 
+void printfile();
 // Prints out all persons data in the binary file
 void printfile() {
     // Intializations
@@ -76,13 +76,13 @@ void printfile() {
     // If statement to make sure the file exists
     if (err == 0) {
         // While loop to iterate over the binary file content 
-        while(fread(&ppost, sizeof(PERSON), 1, fptr) == 1) {
+        while (fread(&ppost, sizeof(PERSON), 1, fptr) == 1) {
             // Printing out the person(s) records
-                printf("%s", ppost.firstname);
-                printf("%s", ppost.famname);
-                printf("%s", ppost.pers_number);
+            printf("%s", ppost.firstname);
+            printf("%s", ppost.famname);
+            printf("%s", ppost.pers_number);
 
-            }
+        }
     }
     // In case of file inexistent
     else {
@@ -91,7 +91,7 @@ void printfile() {
     // Good practice to close the pointer to avoid data loss
     fclose(fptr);
 }
- // link where we got idea for this terminate string func : https://www.delftstack.com/howto/c/trim-string-in-c/
+// link where we got idea for this terminate string func : https://www.delftstack.com/howto/c/trim-string-in-c/
 char* trimString(char* str)
 {
     char* end; // Initialization pointer
@@ -113,7 +113,7 @@ char* trimString(char* str)
     return str;
 }
 
-void search_by_firstname(char* name); 
+void search_by_firstname(char* name);
 // Prints out the person asked for in the list
 void search_by_firstname(char* name) {
     // Intializations
@@ -146,8 +146,8 @@ void search_by_firstname(char* name) {
                 printf("Found family name : %s", ppost.famname);
                 printf("Found personal number : %s\n", ppost.pers_number);
             }
-          //  printf("Failed %s", ppost.firstname);
-            
+            //  printf("Failed %s", ppost.firstname);
+
         }
     }
     // Good practice to close the pointer to avoid data loss

@@ -1,7 +1,8 @@
 // (C) Ahmed Yasser, Axel Broberg, Niklas Höglund , group: 11 (2022)
 // Work package 2
 // Exercise 1
-// Submission code: 
+// Submission code: B11BBBBB
+
 
 #include <stdio.h> // print,scan and getchar
 #include <string.h> //used in the for loop to iterate through movement commands with strlen

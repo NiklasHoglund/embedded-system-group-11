@@ -1,7 +1,7 @@
 // (C) Ahmed Yasser, Axel Broberg, Niklas Höglund , group: 11 (2022)
 // Work package 2
-// Exercise 4
-// Submission code: 
+// Exercise 4_1
+// Submission code: B11BBBBB
 
 #include <stdio.h> // print,scan and getchar
 #include <string.h> //used in the for loop to iterate through movement commands with strlen
@@ -17,10 +17,10 @@ int main(int argc, char* argv[])
 	else if (!check_values(atoi(argv[1]), 1)) { // Checks if the argument passed is too big or too small for the byte
 		printf("Argument 1 is out of bounds");
 	}
-	else if (!check_values(atoi(argv[2]), 7)) {
+	else if (!check_values(atoi(argv[2]), 4)) {
 		printf("Argument 2 is out of bounds");
 	}
-	else if (!check_values(atoi(argv[3]), 3)) {
+	else if (!check_values(atoi(argv[3]), 2)) {
 		printf("Argument 3 is out of bounds");
 	}
 	else if (!check_values(atoi(argv[4]), 1)) {
