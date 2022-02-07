@@ -1,5 +1,5 @@
 #pragma warning(disable : 4996)
-// (C) Ahmed Yasser, Axel Broberg, Niklas Höglund , group: 11 (2022)
+// (C) Ahmed Yasser, Axel Broberg, Niklas HÃ¶glund , group: 11 (2022)
 // Work package 2
 // Exercise 4_2
 // Submission code: B11BBBBB
