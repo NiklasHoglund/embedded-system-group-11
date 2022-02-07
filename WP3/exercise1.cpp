@@ -1,5 +1,8 @@
-// C++ code
-//
+// (C) Ahmed Yasser, Axel Broberg, Niklas Höglund , group: 11 (2022)
+// Work package 3
+// Exercise 1
+// Submission code: 
+
 void setup()
 {
 	pinMode(0, OUTPUT);
