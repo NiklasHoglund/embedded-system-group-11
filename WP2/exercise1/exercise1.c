@@ -3,6 +3,7 @@
 // Exercise 1
 // Submission code: B11BBBBB
 
+
 #include <stdio.h> // print,scan and getchar
 #include <string.h> //used in the for loop to iterate through movement commands with strlen
 
