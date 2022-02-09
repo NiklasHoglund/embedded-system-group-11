@@ -5,6 +5,7 @@
 
 float voltage = 0;
 float temp = 0;
+
 void setup()
 {
 	pinMode(LED_BUILTIN, OUTPUT);
