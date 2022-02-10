@@ -10,6 +10,8 @@ char matrix[4][4] = { // Matrix for the keypad
   {'A', '3', '2', '1'}
 };
 
+char s = '0'; // Char for printing
+
 void setup()
 {
     pinMode(LED_BUILTIN, OUTPUT);
@@ -26,6 +28,14 @@ void setup()
 
 void loop()
 {
+    s = checkNum(); // Assign return value of checknum to s
+    if (s) { // If a button was pressed
+        Serial.println(s);
+        delay(1000);
+    }
+}
+
+char checkNum() {
     for (int i = 8; i < 12; i++) { // For loop to check the rows
 
         digitalWrite(11, HIGH); // Turn on port 8-11
@@ -37,7 +47,7 @@ void loop()
 
         for (int k = 4; k < 8; k++) { // For loop to check the columns
             if (digitalRead(k) == LOW) { // If the column that the button pressed is on is low
-                Serial.println(matrix[i - 8][k - 4]); // Print the char from the matrix that is pressed
+                return matrix[i - 8][k - 4]; // Return the char that was pressed on the keypad
             }
             delay(15);
         }
@@ -45,5 +55,4 @@ void loop()
         digitalWrite(i, HIGH); // Reset the row (port i) to high
         delay(15);
     }
-
 }
