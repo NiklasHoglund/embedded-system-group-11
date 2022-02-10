@@ -1,7 +1,7 @@
 // (C) Ahmed Yasser, Axel Broberg, Niklas Höglund , group: 11 (2022)
 // Work package 3
 // Exercise 3-1
-// Submission code:
+// Submission code: CCCCCC11
 
 char matrix[4][4] = { // Matrix for the keypad
   {'D', '#', '0', '*'},
