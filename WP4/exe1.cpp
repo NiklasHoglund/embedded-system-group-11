@@ -1,79 +1,91 @@
-// (C) Ahmed Yasser, Axel Broberg, Niklas Höglund , group: 11 (2022)
-// Work package 4
-// Exercise 1
-// Submission code:
+const int led_pin = PB5;
 
-// Initialize variables 
+// Counter and compare values
+const uint16_t tl_load = 0;
+const uint16_t tl_comp = 31250;
+
+// Temperature variables
+const int a = 0;
+const int b = 10;
+const int c = 20;
+const int d = 30;
+const int e = 40;
+const int f = 50;
+
 int temp = 0;
 
-int temp1 = 0;
-int temp2 = 10;
-int temp3 = 11;
-int temp4 = 20;
-int temp5 = 21;
-int temp6 = 30;
-int temp7 = 31;
-int temp8 = 40;
-int temp9 = 41;
-int temp10 = 50;
+void tempUpdate(int temp);
 
-void setup()
-{
-    // Initialize pins (output) and analogs (inputs)
-    pinMode(A0, INPUT);
-    // start system
+void setup() {
     Serial.begin(9600);
 
-    pinMode(2, OUTPUT);
-    pinMode(3, OUTPUT);
-    pinMode(4, OUTPUT);
-    pinMode(5, OUTPUT);
-    pinMode(6, OUTPUT);
+    // Set to output
+    DDRB |= (1 << led_pin);
+
+    //Reset Timer1 Control Reg A
+    TCCR1A = 0;
+
+    // Set to prescaler of 256
+    TCCR1B |= (1 << CS12);
+    TCCR1B &= ~(1 << CS11);
+    TCCR1B &= ~(1 << CS10);
+
+    // Reset Timer1 and set compare value
+    TCNT1 = tl_load;
+    OCR1A = tl_comp;
+
+    // Enable timer1 compare interrupt
+    TIMSK1 = (1 << OCIE1A);
+
+    // Enable global interrupts
+    sei();
 }
 
-void loop()
-{
-    // setting up variables to limit the threshold of turning too cold and too hot 
-    // according to the assigment
-  // math logic 
+void loop() {
+    delay(500);
+}
 
+// Create interrupt service routine
+ISR(TIMER1_COMPA_vect) {
+    // Reset timer1 to 0
+    TCNT1 = tl_load;
 
-    temp = map(((analogRead(A0) - 20) * 3.04), 0, 1023, -40, 125); // Math to map the temperature
+    temp = map(((analogRead(A0) - 20) * 3.04), 0, 1023, -40, 125);
+    tempUpdate(temp);
 
-    // just for debugging to print out the current temp
-    Serial.println("Temp: ");
     Serial.println(temp);
+}
 
-
-    if (temp >= temp1 && temp <= temp2) {  //Between 0 and 10 turn on 1 LED
+void tempUpdate(int temp) {
+    if (temp > a && temp <= b) {  //Between 0 and 10 turn on 1 LED
         digitalWrite(6, LOW); // YELLOW
         digitalWrite(5, LOW); // BLUE
         digitalWrite(4, LOW); // WHITE
         digitalWrite(3, LOW); // RED
         digitalWrite(2, HIGH);//GREEN
     }
-    else if (temp >= temp3 && temp <= temp4) { //Between 11 and 20 turn on 2 LEDS
+    else if (temp > b && temp <= c) { //Between 11 and 20 turn on 2 LEDS
         digitalWrite(6, LOW); // YELLOW
         digitalWrite(5, LOW); // BLUE
         digitalWrite(4, LOW); // WHITE
         digitalWrite(3, HIGH); // RED
         digitalWrite(2, HIGH);//GREEN
     }
-    else if (temp >= temp5 && temp <= temp6) { //Between 21 and 30 turn on 3 LEDS
+    else if (temp > c && temp <= d) { //Between 21 and 30 turn on 3 LEDS
         digitalWrite(6, LOW); // YELLOW
         digitalWrite(5, LOW); // BLUE
         digitalWrite(4, HIGH); // WHITE
         digitalWrite(3, HIGH); // RED
         digitalWrite(2, HIGH);//GREEN
     }
-    else if (temp >= temp7 && temp <= temp8) { //Between 31 and 40 turn on 4 LEDS
+    else if (temp > d && temp <= e) { //Between 31 and 40 turn on 4 LEDS
         digitalWrite(6, LOW); // YELLOW
         digitalWrite(5, HIGH);// BLUE
         digitalWrite(4, HIGH); // WHITE
         digitalWrite(3, HIGH); // RED
         digitalWrite(2, HIGH);//GREEN
     }
-    else if (temp >= temp9 && temp <= temp10) { // Between 41 and 50 turn on all 5 LEDS
+    else if (temp > e && temp <= f) { // Between 41 and 50 turn on all 5 LEDS
         digitalWrite(6, HIGH); // YELLOW
         digitalWrite(5, HIGH); // BLUE
         digitalWrite(4, HIGH); // WHITE
@@ -87,8 +99,4 @@ void loop()
         digitalWrite(3, LOW); // RED
         digitalWrite(2, LOW); //GREEN
     }
-
-
-
-    delay(1000); // Delay a little bit to improve simulation performance
 }
