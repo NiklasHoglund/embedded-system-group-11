@@ -1,9 +1,16 @@
+// (C) Ahmed Yasser, Axel Broberg, Niklas Höglund , group: 11 (2022)
+// Work package 4
+// Exercise 3
+// Submission code:
+
 #include <Adafruit_NeoPixel.h>
 
 // How many NeoPixels that are are attached to the Arduino
 #define LED_COUNT 12
 //  pin which on the Arduino is connected to the NeoPixels
 #define LED_PIN    8
+
+// Initialization variables
 
 int temp = 0;
 
