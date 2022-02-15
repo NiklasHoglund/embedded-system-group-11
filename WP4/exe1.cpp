@@ -1,10 +1,15 @@
+// (C) Ahmed Yasser, Axel Broberg, Niklas Höglund , group: 11 (2022)
+// Work package 4
+// Exercise 1
+// Submission code:
+
 const int led_pin = PB5;
 
 // Counter and compare values
 const uint16_t tl_load = 0;
 const uint16_t tl_comp = 31250;
 
-// Temperature variables
+// Initialization of Temperature variables
 const int a = 0;
 const int b = 10;
 const int c = 20;
@@ -50,13 +55,14 @@ ISR(TIMER1_COMPA_vect) {
     // Reset timer1 to 0
     TCNT1 = tl_load;
 
-    temp = map(((analogRead(A0) - 20) * 3.04), 0, 1023, -40, 125);
+    temp = map(((analogRead(A0) - 20) * 3.04), 0, 1023, -40, 125); // math logic
     tempUpdate(temp);
-
+ // printing out the temp values
     Serial.println(temp);
 }
 
 void tempUpdate(int temp) {
+    // if statement to match the required outcome
     if (temp > a && temp <= b) {  //Between 0 and 10 turn on 1 LED
         digitalWrite(6, LOW); // YELLOW
         digitalWrite(5, LOW); // BLUE
