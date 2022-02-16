@@ -27,11 +27,11 @@ void setup() {
     // Set to output
     DDRB |= (1 << led_pin);
 
-    //Reset Timer1 Control Reg A
+    //Reset Timer1 Control Reg 1A
     TCCR1A = 0;
 
     // Set to prescaler of 256
-    // Timer/Counter Control Register 0B
+    // Timer/Counter Control Register 1B
     TCCR1B |= (1 << CS12);
     TCCR1B &= ~(1 << CS11);
     TCCR1B &= ~(1 << CS10);
@@ -39,12 +39,12 @@ void setup() {
     // Reset Timer0 and set compare value
     // Timer/Counter 0
     TCNT1 = tl_load;
-    // Timer/Counter 0 Output Compare Register A
+    // Timer/Counter 0 Output Compare Register 1A
     OCR1A = tl_comp;
 
     // Enable timer0 compare interrupt
     // Timer/Counter Interrupt Mask Register
-    // Timer/Counter0 Output Compare Match A Interrupt Enable
+    // Timer/Counter0 Output Compare Match 1A Interrupt Enable
     TIMSK1 = (1 << OCIE1A);
 
     // Enable global interrupts
