@@ -31,15 +31,20 @@ void setup() {
     TCCR1A = 0;
 
     // Set to prescaler of 256
+    // Timer/Counter Control Register 0B
     TCCR1B |= (1 << CS12);
     TCCR1B &= ~(1 << CS11);
     TCCR1B &= ~(1 << CS10);
 
-    // Reset Timer1 and set compare value
+    // Reset Timer0 and set compare value
+    // Timer/Counter 0
     TCNT1 = tl_load;
+    // Timer/Counter 0 Output Compare Register A
     OCR1A = tl_comp;
 
-    // Enable timer1 compare interrupt
+    // Enable timer0 compare interrupt
+    // Timer/Counter Interrupt Mask Register
+    // Timer/Counter0 Output Compare Match A Interrupt Enable
     TIMSK1 = (1 << OCIE1A);
 
     // Enable global interrupts
