@@ -19,6 +19,8 @@ const int f = 50;
 
 int temp = 0;
 
+bool flag = false;
+
 void tempUpdate(int temp);
 
 void setup() {
@@ -52,18 +54,24 @@ void setup() {
 }
 
 void loop() {
-    delay(500);
-}
-
-// Create interrupt service routine
-ISR(TIMER1_COMPA_vect) {
-    // Reset timer1 to 0
-    TCNT1 = tl_load;
-
+  if(flag){
     temp = map(((analogRead(A0) - 20) * 3.04), 0, 1023, -40, 125); // math logic
     tempUpdate(temp);
  // printing out the temp values
     Serial.println(temp);
+    flag =false;
+  }
+  
+    delay(500);
+  
+}
+
+// Create interrupt service routine
+ISR(TIMER1_COMPA_vect) {  
+    // Reset timer1 to 0 
+    TCNT1 = tl_load;
+  flag = true; // Flag to check
+  
 }
 
 void tempUpdate(int temp) {
