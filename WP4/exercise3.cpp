@@ -1,7 +1,7 @@
 // (C) Ahmed Yasser, Axel Broberg, Niklas Höglund , group: 11 (2022)
 // Work package 4
 // Exercise 3
-// Submission code:
+// Submission code: Group 11: DD11DDDD
 
 #include <Adafruit_NeoPixel.h> 	//Library for Neopixel ring by Adafruit
 
