@@ -1,7 +1,7 @@
 // (C) Ahmed Yasser, Axel Broberg, Niklas Höglund , group: 11 (2022)
 // Work package 4
 // Exercise 1
-// Submission code:
+// Submission code: Group 11: DD11DDDD
 
 const int led_pin = PB5;
 
@@ -19,6 +19,8 @@ const int f = 50;
 
 int temp = 0;
 
+bool flag = false;
+
 void tempUpdate(int temp);
 
 void setup() {
@@ -27,19 +29,24 @@ void setup() {
     // Set to output
     DDRB |= (1 << led_pin);
 
-    //Reset Timer1 Control Reg A
+    //Reset Timer1 Control Reg 1A
     TCCR1A = 0;
 
     // Set to prescaler of 256
+    // Timer/Counter Control Register 1B
     TCCR1B |= (1 << CS12);
     TCCR1B &= ~(1 << CS11);
     TCCR1B &= ~(1 << CS10);
 
-    // Reset Timer1 and set compare value
+    // Reset Timer0 and set compare value
+    // Timer/Counter 0
     TCNT1 = tl_load;
+    // Timer/Counter 0 Output Compare Register 1A
     OCR1A = tl_comp;
 
-    // Enable timer1 compare interrupt
+    // Enable timer0 compare interrupt
+    // Timer/Counter Interrupt Mask Register
+    // Timer/Counter0 Output Compare Match 1A Interrupt Enable
     TIMSK1 = (1 << OCIE1A);
 
     // Enable global interrupts
@@ -47,18 +54,24 @@ void setup() {
 }
 
 void loop() {
-    delay(500);
-}
-
-// Create interrupt service routine
-ISR(TIMER1_COMPA_vect) {
-    // Reset timer1 to 0
-    TCNT1 = tl_load;
-
+  if(flag){
     temp = map(((analogRead(A0) - 20) * 3.04), 0, 1023, -40, 125); // math logic
     tempUpdate(temp);
  // printing out the temp values
     Serial.println(temp);
+    flag =false;
+  }
+  
+    delay(500);
+  
+}
+
+// Create interrupt service routine
+ISR(TIMER1_COMPA_vect) {  
+    // Reset timer1 to 0 
+    TCNT1 = tl_load;
+  flag = true; // Flag to check
+  
 }
 
 void tempUpdate(int temp) {
