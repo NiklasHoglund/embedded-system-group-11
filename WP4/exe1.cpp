@@ -1,7 +1,7 @@
 // (C) Ahmed Yasser, Axel Broberg, Niklas Höglund , group: 11 (2022)
 // Work package 4
 // Exercise 1
-// Submission code:
+// Submission code: Group 11: DD11DDDD
 
 const int led_pin = PB5;
 
