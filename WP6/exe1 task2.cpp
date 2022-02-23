@@ -91,7 +91,7 @@ void loop() {
         }
 
             // Rotating counter-clockwise
-        else {
+        else if (e < 0) {
             if (-speed < 100) // motor does not react with too low inputs
                 speed = -100;
             analogWrite(PWM1, 0);
@@ -99,6 +99,8 @@ void loop() {
         }
         // Calculate new error
         e = degtarget - deg;
+        Serial.print("Current position: ");
+        Serial.println(deg);
     }
 }
 
