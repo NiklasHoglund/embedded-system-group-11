@@ -46,6 +46,15 @@ void loop() {
     delay(1000); // TinkerCad...bug
     analogWrite(PWM2, 10);
 
+    if (pos > 2299){
+        deg = deg - 359;
+        pos = pos - 2299;
+    }
+    if (pos < 0){
+        deg = 359 + deg;
+        pos = 2299 + pos;
+    }
+
     // Print current position
     Serial.print("The current position is: ");
     Serial.print(deg);
@@ -55,28 +64,21 @@ void loop() {
 
     degtarget = getInput();
 
+
+
+
     // Calculate initial error
     e = degtarget - deg;
-    Serial.println(e);
-    Serial.println(" ");
-    Serial.println(degtarget);
-    Serial.println(" ");
-    Serial.println(deg);
+
     // Loop until error is zero
     while(e){
-        pos = a;
+
 
         // Map current position into degrees
         deg = map(pos,0,2299,0,359);
         // Check if motor rotated all the way around, and reset counter
-        if (pos > 6200){
-            deg = 0;
-            pos = 0;
-        }
-        if (pos < 0){
-            deg = 359;
-            pos = 6200;
-        }
+
+
 
         // Get necessary speed signal
         speed = getAction(e);
@@ -98,7 +100,7 @@ void loop() {
             analogWrite(PWM2, -speed);
         }
         // Calculate new error
-        e = deg - degtarget;
+        e = degtarget - deg;
         Serial.print("Error: ");
         Serial.println(e);
     }
@@ -143,5 +145,11 @@ void ISR_readEncoder(){
     READ THE ENCODER SIGNAL HERE.
     Read the encoder signals and increase or decrease pos accordingly.
     */
-    a = a + 1;
+    a = digitalRead(ENCA);
+    b = digitalRead(ENCB);
+
+    if (a > b)
+        pos++;
+    else
+        pos--;
 }
