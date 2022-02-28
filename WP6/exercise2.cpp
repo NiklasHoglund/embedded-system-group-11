@@ -1,7 +1,7 @@
 // (C) Ahmed Yasser, Axel Broberg, Niklas Höglund , group: 11 (2022)
 // Work package 6
 // Exercise 2
-// Submission code: 
+// Submission code: 1111111F
 
 // Initializations
 const int signalPin = 7;
@@ -24,12 +24,12 @@ void setup() {
 }
 
 void loop() {
-    // variables for duration of the ping,
-    // and distance result in centimeters:
+    // variables for duration of the ping,distance result in centimeters:
     long duration, cm;
-
-    // The PING :is triggered by a HIGH pulse of 2 or more microseconds.
-    // Give a short LOW pulse beforehand to ensure a clean HIGH pulse:
+  
+    // Logic
+    // triggered by a HIGH pulse of 2 or more microseconds.
+    // Give a short LOW pulse beforehand to ensure a clean HIGH pulse
     pinMode(signalPin, OUTPUT);
     digitalWrite(signalPin, LOW);
     delayMicroseconds(2);
@@ -37,16 +37,13 @@ void loop() {
     delayMicroseconds(5);
     digitalWrite(signalPin, LOW);
 
-    // The same pin is used to read the signal from the PING))): a HIGH
-    // pulse whose duration is the time (in microseconds) from the sending
-    // of the ping to the reception of its echo off of an object.
     pinMode(signalPin, INPUT);
     duration = pulseIn(signalPin, HIGH);
 
-    // Convert time into  distance
+    // Convert time into distance
     cm = microsecondsToCentimeters(duration);
 
-    // Print the distance
+    // Print the distance just for debugging
     Serial.print("Distance between object : ");
     Serial.print(cm);
     Serial.print("cm");
@@ -80,8 +77,8 @@ void loop() {
         digitalWrite(LED3, HIGH);
         digitalWrite(LED4, HIGH);
         digitalWrite(negPin, HIGH);
-        tone(negPin, 150);
-    } else if (cm <= 25) {
+        tone(negPin, 150); // Makes the tone more annoying
+    } else if (cm <= 25) { // Periodically turn all LEDs ON and OFF
         digitalWrite(negPin, HIGH);
         tone(negPin, 200);
 
