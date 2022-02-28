@@ -1,14 +1,21 @@
+// (C) Ahmed Yasser, Axel Broberg, Niklas Höglund , group: 11 (2022)
+// Work package 5
+// Exercise 2
+// Submission code: EEE11EEE
+
+//Variables
 int temp;
 int analogPin = A0;
+//Variables for the leds temperature range 
 int temp1 = 0;
 int temp2 = 26;
 int temp3 = 28;
 int temp4 = 30;
 int temp5 = 32;
-int temp6 = 35;
+int temp6 = 50;
 
 #include <math.h>
-/*Code to convert the sensor reading to degrees celsius was used from example code at
+/*Code to convert the sensor reading to degrees celsius that was used from example code at
 http://arduino-sensor.org/sensor-kits/arduino-ky-013-temperature-sensor-module/ */
 double Thermistor(int RawADC) {
     double Temp;
@@ -20,22 +27,25 @@ double Thermistor(int RawADC) {
 
 void setup()
 {
+    // Initialize pins
     pinMode(A0, INPUT);
     pinMode(2, OUTPUT);
     pinMode(3, OUTPUT);
     pinMode(4, OUTPUT);
     pinMode(5, OUTPUT);
     pinMode(6, OUTPUT);
-    // start system
+    // start serial communication
     Serial.begin(9600);
 }
 
 void loop()
 {
+    //Reading sensor value from analog pin A0
     int valueFromPin = analogRead(analogPin);
+    //Converting to degrees Celsius
     double temp = Thermistor(valueFromPin);
     Serial.println(temp);
-
+    // if the temp variable is between temperature range
     if (temp >= temp1 && temp <= temp2) {  //Between 0 and 26 turn on 1 LED
         digitalWrite(6, LOW); // FIFTH 
         digitalWrite(5, LOW); // FOURTH
@@ -65,7 +75,7 @@ void loop()
         digitalWrite(3, HIGH); //SECOND
         digitalWrite(2, HIGH); //FIRST
     }
-    else if (temp >= temp4 && temp >= temp5) { // Between 32 and 50 turn on five leds
+    else if (temp >= temp5 && temp <= temp6) { // Between 32 and 50 turn on five leds
         digitalWrite(6, HIGH); // FIFTH 
         digitalWrite(5, HIGH); // FOURTH
         digitalWrite(4, HIGH); // THIRD
@@ -74,11 +84,11 @@ void loop()
     }
 
     else {  //  Close all if it does not satisfy our req
-        digitalWrite(6, LOW); // YELLOW
-        digitalWrite(5, LOW); // BLUE
-        digitalWrite(4, LOW); // WHITE
-        digitalWrite(3, LOW); // RED
-        digitalWrite(2, LOW); //GREEN
+        digitalWrite(6, LOW); // FIFTH
+        digitalWrite(5, LOW); // FOURTH
+        digitalWrite(4, LOW); // THIRD
+        digitalWrite(3, LOW); //SECOND
+        digitalWrite(2, LOW); //FIRST
     }
 
     delay(1000);
