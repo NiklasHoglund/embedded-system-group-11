@@ -1,4 +1,7 @@
-// WP 6 Exercise 1 Template DIT 632
+// (C) Ahmed Yasser, Axel Broberg, Niklas Höglund , group: 11 (2022)
+// Work package 6
+// Exercise 1_3
+// Submission code: 1111111F
 
 #define ENCA 2
 #define ENCB 3
@@ -61,11 +64,7 @@ void loop() {
     Serial.print("\n");
 
     // Get input
-
     degtarget = getInput();
-
-
-
 
     // Calculate initial error
     e = degtarget - deg;
@@ -76,15 +75,12 @@ void loop() {
 
         // Map current position into degrees
         deg = map(pos,0,2299,0,359);
-        // Check if motor rotated all the way around, and reset counter
-
-
 
         // Get necessary speed signal
         speed = getAction(e);
         // Send speed signal to motor
-        // Rotating clockwise
 
+        // Rotating clockwise
         if(e > 0){
             if (speed < 100) // motor does not react with too low inputs
                 speed = 100;
@@ -92,13 +88,14 @@ void loop() {
             analogWrite(PWM1, speed);
         }
 
-            // Rotating counter-clockwise
+        // Rotating counter-clockwise
         else if (e < 0) {
             if (-speed < 100) // motor does not react with too low inputs
                 speed = -100;
             analogWrite(PWM1, 0);
             analogWrite(PWM2, -speed);
         }
+
         // Calculate new error
         e = degtarget - deg;
         Serial.print("Error: ");
@@ -145,11 +142,14 @@ void ISR_readEncoder(){
     READ THE ENCODER SIGNAL HERE.
     Read the encoder signals and increase or decrease pos accordingly.
     */
+    // Read both encoder signals
     a = digitalRead(ENCA);
     b = digitalRead(ENCB);
 
+    // If encoder signal a is on but b is not: move clockwise
     if (a > b)
         pos++;
+    // Else: move counter clockwise
     else
         pos--;
 }

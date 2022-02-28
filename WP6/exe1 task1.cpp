@@ -1,9 +1,7 @@
-// (C) Ahmed Yasser, Axel Broberg, Niklas Höglund , group: 11 (2022)
+// (C) Ahmed Yasser, Axel Broberg, Niklas HÃ¶glund , group: 11 (2022)
 // Work package 6
-// Exercise 1
-// Submission code: 
-
-// WP 6 Exercise 1 Template DIT 632, provided from Teaching faculty
+// Exercise 1_3
+// Submission code: 1111111F
 
 #define ENCA 2
 #define ENCB 3
